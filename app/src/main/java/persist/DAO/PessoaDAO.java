@@ -6,6 +6,7 @@ import model.Pessoa;
 
 public interface PessoaDAO {
 
+    long    salvar(Pessoa p);
     void   criar(Pessoa p);
     Pessoa buscar(int id);
     void   alterar(Pessoa p);
