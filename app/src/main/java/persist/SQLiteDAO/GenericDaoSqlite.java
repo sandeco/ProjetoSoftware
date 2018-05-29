@@ -5,15 +5,15 @@ import android.database.sqlite.SQLiteDatabase;
 import persist.DatabaseHelper;
 import util.MyApp;
 
-public class GenericDaoSqlite {
+public abstract class GenericDaoSqlite {
 
 
     public SQLiteDatabase getWritebleDB(){
-        return DatabaseHelper.getInstance(MyApp.getContext()).getReadableDatabase();
+        return DatabaseHelper.getInstance(MyApp.getContext()).getWritableDatabase();
     }
 
 
-    public SQLiteDatabase getReadbleDB(){
+    public SQLiteDatabase getReadableDB(){
         return DatabaseHelper.getInstance(MyApp.getContext()).getReadableDatabase();
     }
 
