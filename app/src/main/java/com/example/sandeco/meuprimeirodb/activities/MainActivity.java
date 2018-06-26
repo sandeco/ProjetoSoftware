@@ -1,5 +1,6 @@
 package com.example.sandeco.meuprimeirodb.activities;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.widget.Toast;
@@ -11,6 +12,8 @@ import persist.DAO.FabricaDAO;
 import persist.DAO.PessoaDAO;
 import persist.DatabaseHelper;
 import persist.SQLiteDAO.PessoaDaoSqlite;
+import service.MyService;
+import util.MyApp;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -21,6 +24,9 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        iniciarService();
+
 
 
         pessoaDAO = FabricaDAO.criarPessoaDao();
@@ -36,4 +42,12 @@ public class MainActivity extends AppCompatActivity {
             Toast.makeText(this,"Erro ao grava pessoa",Toast.LENGTH_LONG);
         }
     }
+
+
+    private void iniciarService(){
+        Intent intent = new Intent(this, MyService.class);
+        MyApp.getContext().startService(intent);
+    }
+
+
 }
