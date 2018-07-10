@@ -6,50 +6,56 @@ import android.os.IBinder;
 import android.util.Log;
 import android.widget.Toast;
 
+import com.android.volley.RequestQueue;
+import com.android.volley.toolbox.Volley;
+
 import util.MyApp;
 
 public class MyService extends Service {
 
 
-    public MyService() {
-    }
 
+    public MyService() {
+
+    }
 
     @Override
     public IBinder onBind(Intent intent) {
         // TODO: Return the communication channel to the service.
-        return null;
+        throw new UnsupportedOperationException("Not yet implemented");
     }
-
 
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
+
         Toast.makeText(MyApp.getContext(), "service iniciado", Toast.LENGTH_LONG).show();
-        MinhaThead minhaThead = new MinhaThead(startId);
-        minhaThead.start();
+
+        MinhaThread minhaThread = new MinhaThread(startId);
+        minhaThread.start();
+
         return super.onStartCommand(intent, flags, startId);
     }
 
 
-    private class MinhaThead extends Thread{
+    private class MinhaThread extends Thread{
 
         int startId = 0;
-        int cont = 0;
+        int cont    = 0;
 
-        public MinhaThead(int startId){
+        public MinhaThread(int startId){
             this.startId = startId;
         }
 
         @Override
         public void run() {
-            while(cont<10) {
+            while(cont<10){
                 try {
-                    Thread.sleep(5000);
+                    Log.i("MINHA SERVICE","CONT = " +cont);
+                    Thread.sleep(2000);
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
                 cont++;
-                Log.i("SANDECO", " CONT = "+ cont);
             }
             stopSelf(startId);
         }
@@ -57,6 +63,6 @@ public class MyService extends Service {
 
     @Override
     public void onDestroy() {
-        Toast.makeText(MyApp.getContext(), "service FINALIZADO", Toast.LENGTH_LONG).show();
+        Toast.makeText(MyApp.getContext(), "service terminado", Toast.LENGTH_LONG).show();
     }
 }
