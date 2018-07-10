@@ -1,8 +1,8 @@
 package com.example.sandeco.meuprimeirodb.activities;
 
 import android.content.Intent;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.widget.Toast;
 
 import com.example.sandeco.meuprimeirodb.R;
@@ -11,9 +11,8 @@ import model.Pessoa;
 import persist.DAO.FabricaDAO;
 import persist.DAO.PessoaDAO;
 import persist.DatabaseHelper;
-import persist.SQLiteDAO.PessoaDaoSqlite;
+import service.ConnectService;
 import service.MyService;
-import util.MyApp;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -23,10 +22,10 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
 
         iniciarService();
 
+        setContentView(R.layout.activity_main);
 
 
         pessoaDAO = FabricaDAO.criarPessoaDao();
@@ -45,8 +44,8 @@ public class MainActivity extends AppCompatActivity {
 
 
     private void iniciarService(){
-        Intent intent = new Intent(this, MyService.class);
-        MyApp.getContext().startService(intent);
+        Intent intent = new Intent(this, ConnectService.class);
+        startService(intent);
     }
 
 
